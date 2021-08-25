@@ -29,20 +29,20 @@ public class Students {
     @Column(name = "birthday")
     private String birthday;
 
-    @Column(name = "faculty")
-    private int faculty;
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinColumn(name = "faculty_id")
+    private Faculties faculty;
 
     public Students() {
     }
 
-    public Students(String firstName, String lastName, String middleName, String email, String phone, String birthday, int faculty) {
+    public Students(String firstName, String lastName, String middleName, String email, String phone, String birthday) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.middleName = middleName;
         this.email = email;
         this.phone = phone;
         this.birthday = birthday;
-        this.faculty = faculty;
     }
 
     public int getId() {
@@ -101,11 +101,11 @@ public class Students {
         this.birthday = birthday;
     }
 
-    public int getFaculty() {
+    public Faculties getFaculty() {
         return faculty;
     }
 
-    public void setFaculty(int faculty) {
+    public void setFaculty(Faculties faculty) {
         this.faculty = faculty;
     }
 

@@ -17,16 +17,16 @@ public class Users {
     @Column(name = "user_password")
     private String password;
 
-    @Column(name = "user_role")
-    private int role;
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinColumn(name = "user_role")
+    private Roles role;
 
     public Users() {
     }
 
-    public Users(String login, String password, int role) {
+    public Users(String login, String password) {
         this.login = login;
         this.password = password;
-        this.role = role;
     }
 
     public int getId() {
@@ -53,11 +53,11 @@ public class Users {
         this.password = password;
     }
 
-    public int getRole() {
+    public Roles getRole() {
         return role;
     }
 
-    public void setRole(int role) {
+    public void setRole(Roles role) {
         this.role = role;
     }
 
@@ -67,7 +67,6 @@ public class Users {
                 "id=" + id +
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
-                ", role=" + role +
                 '}';
     }
 }
