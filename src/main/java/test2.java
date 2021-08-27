@@ -1,4 +1,4 @@
-//import model.Students;
+//import restApplication.model.Students;
 //import org.hibernate.Session;
 //import org.hibernate.SessionFactory;
 //import org.hibernate.cfg.Configuration;
