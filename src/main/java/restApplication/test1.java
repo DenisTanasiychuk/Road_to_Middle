@@ -1,5 +1,7 @@
-import model.Faculties;
-import model.Students;
+package restApplication;
+
+import restApplication.model.Faculties;
+import restApplication.model.Students;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
