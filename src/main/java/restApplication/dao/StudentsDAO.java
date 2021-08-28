@@ -19,7 +19,7 @@ public interface StudentsDAO {
 
     public List<Faculty> getAllFacultiesOnQuantityStudents();
 
-    public void saveStudent(int id);
+    public void saveStudent(Student student);
 
     public void updateStudent(int id);
 

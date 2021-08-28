@@ -2,6 +2,7 @@ package restApplication.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import restApplication.dao.StudentsDAO;
 import restApplication.model.Faculty;
 import restApplication.model.Student;
@@ -15,6 +16,7 @@ public class StudentsServiceImpl implements StudentsService{
     private StudentsDAO studentsDAO;
 
     @Override
+    @Transactional
     public List<Student> getAllStudents() {
         return studentsDAO.getAllStudents();
     }
@@ -30,6 +32,7 @@ public class StudentsServiceImpl implements StudentsService{
     }
 
     @Override
+    @Transactional
     public List<Faculty> getAllFaculties() {
         return studentsDAO.getAllFaculties();
     }
@@ -45,8 +48,9 @@ public class StudentsServiceImpl implements StudentsService{
     }
 
     @Override
-    public void saveStudent(int id) {
-
+    @Transactional
+    public void saveStudent(Student student) {
+        studentsDAO.saveStudent(student);
     }
 
     @Override
