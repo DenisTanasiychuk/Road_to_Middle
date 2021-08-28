@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "users_roles")
-public class Roles {
+public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -17,16 +17,16 @@ public class Roles {
 
     @OneToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH},
     mappedBy = "role")
-    private List<Users> usersList;
+    private List<User> usersList;
 
-    public Roles() {
+    public Role() {
     }
 
-    public Roles(String roleName) {
+    public Role(String roleName) {
         this.roleName = roleName;
     }
 
-    public void addUsersToRole(Users user){
+    public void addUsersToRole(User user){
         if (usersList == null){
             usersList = new ArrayList<>();
         }
@@ -52,7 +52,7 @@ public class Roles {
 
     @Override
     public String toString() {
-        return "Roles{" +
+        return "Role{" +
                 "id=" + id +
                 ", roleName='" + roleName + '\'' +
                 '}';

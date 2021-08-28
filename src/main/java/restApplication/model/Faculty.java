@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "faculties")
-public class Faculties {
+public class Faculty {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,16 +18,16 @@ public class Faculties {
 
     @OneToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH},
             mappedBy = "faculty")
-    private List<Students> studentsList;
+    private List<Student> studentsList;
 
-    public Faculties() {
+    public Faculty() {
     }
 
-    public Faculties(String name) {
+    public Faculty(String name) {
         this.name = name;
     }
 
-    public void addStudentToFaculty(Students student){
+    public void addStudentToFaculty(Student student){
         if (studentsList == null){
             studentsList = new ArrayList<>();
         }
@@ -51,17 +51,17 @@ public class Faculties {
         this.name = name;
     }
 
-    public List<Students> getStudentsList() {
+    public List<Student> getStudentsList() {
         return studentsList;
     }
 
-    public void setStudentsList(List<Students> studentsList) {
+    public void setStudentsList(List<Student> studentsList) {
         this.studentsList = studentsList;
     }
 
     @Override
     public String toString() {
-        return "Faculties{" +
+        return "Faculty{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';

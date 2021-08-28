@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "students")
-public class Students {
+public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,12 +31,12 @@ public class Students {
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "faculty_id")
-    private Faculties faculty;
+    private Faculty faculty;
 
-    public Students() {
+    public Student() {
     }
 
-    public Students(String firstName, String lastName, String middleName, String email, String phone, String birthday) {
+    public Student(String firstName, String lastName, String middleName, String email, String phone, String birthday) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.middleName = middleName;
@@ -101,17 +101,17 @@ public class Students {
         this.birthday = birthday;
     }
 
-    public Faculties getFaculty() {
+    public Faculty getFaculty() {
         return faculty;
     }
 
-    public void setFaculty(Faculties faculty) {
+    public void setFaculty(Faculty faculty) {
         this.faculty = faculty;
     }
 
     @Override
     public String toString() {
-        return "Students{" +
+        return "Student{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
