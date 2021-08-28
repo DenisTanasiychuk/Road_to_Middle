@@ -17,13 +17,10 @@ public class StudentsDAOImpl implements StudentsDAO {
     private SessionFactory sessionFactory;
 
     @Override
-    @Transactional
     public List<Student> getAllStudents() {
 
         Session session = sessionFactory.getCurrentSession();
-
         List<Student> allStudents = session.createQuery("from Student", Student.class).getResultList();
-
         return allStudents;
     }
 
@@ -57,8 +54,10 @@ public class StudentsDAOImpl implements StudentsDAO {
     }
 
     @Override
-    public void saveStudent(int id) {
+    public void saveStudent(Student student) {
 
+        Session session = sessionFactory.getCurrentSession();
+        session.save(student);
     }
 
     @Override
