@@ -1,4 +1,4 @@
-//import restApplication.model.Students;
+//import restApplication.model.Student;
 //import org.hibernate.Session;
 //import org.hibernate.SessionFactory;
 //import org.hibernate.cfg.Configuration;
@@ -7,14 +7,14 @@
 //    public static void main(String[] args) {
 //
 //        SessionFactory factory = new Configuration().configure("hibernate.cfg.xml")
-//                .addAnnotatedClass(Students.class)
+//                .addAnnotatedClass(Student.class)
 //                .buildSessionFactory();
 //
 //        try {
 //
 //            Session session = factory.getCurrentSession();
 //
-//            Students student = new Students("Petr", "Petrov", "Petrovich", "petr@gmail.com", "9515887431", "25.02.1992", 1);
+//            Student student = new Student("Petr", "Petrov", "Petrovich", "petr@gmail.com", "9515887431", "25.02.1992", 1);
 //
 //            session.beginTransaction();
 //
@@ -28,7 +28,7 @@
 //
 //            session.beginTransaction();
 //
-//            Students studentPetr = session.get(Students.class, myID);
+//            Student studentPetr = session.get(Student.class, myID);
 //
 //            session.getTransaction().commit();
 //

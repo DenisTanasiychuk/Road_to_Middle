@@ -1,7 +1,7 @@
 package restApplication;
 
-import restApplication.model.Faculties;
-import restApplication.model.Students;
+import restApplication.model.Faculty;
+import restApplication.model.Student;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -10,8 +10,8 @@ public class test1 {
     public static void main(String[] args) {
 
         SessionFactory factory = new Configuration().configure("hibernate.cfg.xml")
-                .addAnnotatedClass(Students.class)
-                .addAnnotatedClass(Faculties.class)
+                .addAnnotatedClass(Student.class)
+                .addAnnotatedClass(Faculty.class)
                 .buildSessionFactory();
 
         Session session = null;
@@ -22,10 +22,10 @@ public class test1 {
 
             session.beginTransaction();
 
-            Students student = new Students("Sofia", "Sidorova", "Alexandrovna", "sofa@gmail.com" , "89625784159", "02.02.1992");
-//            Faculties facult = new Faculties("Computer science faculty ");
-//           Faculties facult = new Faculties("Faculty of Economics ");
-           Faculties facult = new Faculties("Faculty of Medicine ");
+            Student student = new Student("Sofia", "Sidorova", "Alexandrovna", "sofa@gmail.com" , "89625784159", "02.02.1992");
+//            Faculty facult = new Faculty("Computer science faculty ");
+//           Faculty facult = new Faculty("Faculty of Economics ");
+           Faculty facult = new Faculty("Faculty of Medicine ");
 
             student.setFaculty(facult);
 
