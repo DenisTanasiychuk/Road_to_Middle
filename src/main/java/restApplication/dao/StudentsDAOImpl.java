@@ -2,9 +2,9 @@ package restApplication.dao;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import restApplication.model.Faculty;
 import restApplication.model.Student;
 
@@ -26,13 +26,21 @@ public class StudentsDAOImpl implements StudentsDAO {
 
 
     @Override
-    public List<Student> getStudentsOnLastname() {
-        return null;
+    public List<Student> getStudentsOnLastname(String lastName) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("from Student where lastName = : paramName");
+        query.setParameter("paramName", lastName);
+        List<Student> studentList = query.list();
+        return studentList;
     }
 
     @Override
-    public Student getStudentOnPhone() {
-        return null;
+    public Student getStudentOnPhone(String phone) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("from Student where phone = : paramName");
+        query.setParameter("paramName", phone);
+        Student student = (Student) query;
+        return student;
     }
 
     @Override
@@ -44,7 +52,7 @@ public class StudentsDAOImpl implements StudentsDAO {
     }
 
     @Override
-    public Faculty getAllFacultiesOnMaxQuantityStudents() {
+    public List<Faculty> getAllFacultiesOnMaxQuantityStudents() {
         return null;
     }
 
@@ -67,6 +75,12 @@ public class StudentsDAOImpl implements StudentsDAO {
 
     @Override
     public void deleteStudent(int id) {
+
+        Session session = sessionFactory.getCurrentSession();
+        Query<Student> query = session.createQuery("delete Student where id = : paramName ");
+        query.setParameter("paramName" , id);
+        int result = query.executeUpdate();
+
 
     }
 }

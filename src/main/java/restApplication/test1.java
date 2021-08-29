@@ -22,10 +22,10 @@ public class test1 {
 
             session.beginTransaction();
 
-            Student student = new Student("Sofia", "Sidorova", "Alexandrovna", "sofa@gmail.com" , "89625784159", "02.02.1992");
+            Student student = new Student("Denis", "Denisov", "Denisovich", "denis@gmail.com" , "89647851263", "03.07.1994");
 //            Faculty facult = new Faculty("Computer science faculty ");
 //           Faculty facult = new Faculty("Faculty of Economics ");
-           Faculty facult = new Faculty("Faculty of Medicine ");
+           Faculty facult =  new Faculty("Computer science faculty");
 
             student.setFaculty(facult);
 
