@@ -9,13 +9,13 @@ public interface StudentsDAO {
 
     public List<Student> getAllStudents();
 
-    public List<Student> getStudentsOnLastname();
+    public List<Student> getStudentsOnLastname(String lastName);
 
-    public Student getStudentOnPhone();
+    public Student getStudentOnPhone(String phone);
 
     public List<Faculty> getAllFaculties();
 
-    public Faculty getAllFacultiesOnMaxQuantityStudents();
+    public List<Faculty> getAllFacultiesOnMaxQuantityStudents();
 
     public List<Faculty> getAllFacultiesOnQuantityStudents();
 
