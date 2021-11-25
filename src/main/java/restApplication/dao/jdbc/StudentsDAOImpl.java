@@ -1,6 +1,7 @@
 package restApplication.dao.jdbc;
 
 import restApplication.da.Util;
+import restApplication.model.Faculty;
 import restApplication.model.Student;
 
 import java.sql.*;
@@ -15,7 +16,7 @@ public class StudentsDAOImpl extends Util implements StudentsDAO {
     public List<Student> getAllStudents() throws SQLException {
         List<Student> studentList = new ArrayList<>();
 
-        String sql = "SELECT ID, FIRSTNAME, LASTNAME, MIDDLENAME, EMAIL, PHONE, BIRTHDAY, FACULT";
+        String sql = "SELECT * FROM students";
         Statement statement = null;
 
         try {
@@ -25,14 +26,14 @@ public class StudentsDAOImpl extends Util implements StudentsDAO {
 
             while (resultSet.next()){
                 Student student = new Student();
-                student.setId(resultSet.getInt("ID"));
-                student.setFirstName(resultSet.getString("FIRSTNAME"));
-                student.setLastName(resultSet.getString("LASTNAME"));
-                student.setMiddleName(resultSet.getString("MIDDLENAME"));
-                student.setEmail(resultSet.getString("EMAIL"));
-                student.setPhone(resultSet.getString("PHONE"));
-                student.setBirthday(resultSet.getString("BIRTHDAY"));
-                student.setFaculty(resultSet.getLong("FACULT"));
+                student.setId(resultSet.getInt("id"));
+                student.setFirstName(resultSet.getString("first_name"));
+                student.setLastName(resultSet.getString("last_name"));
+                student.setMiddleName(resultSet.getString("middle_name"));
+                student.setEmail(resultSet.getString("email"));
+                student.setPhone(resultSet.getString("phone"));
+                student.setBirthday(resultSet.getString("birthday"));
+                student.setFaculty(resultSet.getLong("faculty_id"));
 
                 studentList.add(student);
             }
@@ -56,7 +57,7 @@ public class StudentsDAOImpl extends Util implements StudentsDAO {
 
         PreparedStatement preparedStatement = null;
 
-        String sql = "SELECT ID, FIRSTNAME, LASTNAME, MIDDLENAME, EMAIL, PHONE, BIRTHDAY, FACULTY FROM STUDENTS WHERE LASTNAME=?";
+        String sql = "SELECT * FROM students WHERE last_name=?";
 
         try {
             preparedStatement = connection.prepareStatement(sql);
@@ -66,14 +67,14 @@ public class StudentsDAOImpl extends Util implements StudentsDAO {
 
             while (resultSet.next()){
                 Student student = new Student();
-                student.setId(resultSet.getInt("ID"));
-                student.setFirstName(resultSet.getString("FIRSTNAME"));
-                student.setLastName(resultSet.getString("LASTNAME"));
-                student.setMiddleName(resultSet.getString("MIDDLENAME"));
-                student.setEmail(resultSet.getString("EMAIL"));
-                student.setPhone(resultSet.getString("PHONE"));
-                student.setBirthday(resultSet.getString("BIRTHDAY"));
-                student.setFaculty(resultSet.getLong("FACULT"));
+                student.setId(resultSet.getInt("id"));
+                student.setFirstName(resultSet.getString("first_name"));
+                student.setLastName(resultSet.getString("last_name"));
+                student.setMiddleName(resultSet.getString("middle_name"));
+                student.setEmail(resultSet.getString("email"));
+                student.setPhone(resultSet.getString("phone"));
+                student.setBirthday(resultSet.getString("birthday"));
+                student.setFaculty(resultSet.getLong("faculty_id"));
 
                 studentList.add(student);
             }
@@ -88,14 +89,14 @@ public class StudentsDAOImpl extends Util implements StudentsDAO {
             }
         }
 
-        return null;
+        return studentList;
     }
 
     @Override
     public Student getStudentOnPhone(String phone) throws SQLException {
         PreparedStatement preparedStatement = null;
 
-        String sql = "SELECT ID, FIRSTNAME, LASTNAME, MIDDLENAME, EMAIL, PHONE, BIRTHDAY, FACULTY FROM STUDENTS WHERE PHONE=?";
+        String sql = "SELECT * FROM students WHERE phone=?";
 
         Student student = new Student();
 
@@ -105,14 +106,14 @@ public class StudentsDAOImpl extends Util implements StudentsDAO {
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            student.setId(resultSet.getInt("ID"));
-            student.setFirstName(resultSet.getString("FIRSTNAME"));
-            student.setLastName(resultSet.getString("LASTNAME"));
-            student.setMiddleName(resultSet.getString("MIDDLENAME"));
-            student.setEmail(resultSet.getString("EMAIL"));
-            student.setPhone(resultSet.getString("PHONE"));
-            student.setBirthday(resultSet.getString("BIRTHDAY"));
-            student.setFaculty(resultSet.getLong("FACULTY"));
+            student.setId(resultSet.getInt("id"));
+            student.setFirstName(resultSet.getString("first_name"));
+            student.setLastName(resultSet.getString("last_name"));
+            student.setMiddleName(resultSet.getString("middle_name"));
+            student.setEmail(resultSet.getString("email"));
+            student.setPhone(resultSet.getString("phone"));
+            student.setBirthday(resultSet.getString("birthday"));
+            student.setFaculty(resultSet.getLong("faculty_id"));
 
             preparedStatement.executeUpdate();
 
@@ -130,12 +131,58 @@ public class StudentsDAOImpl extends Util implements StudentsDAO {
         }
         return student;
     }
+    @Override
+    public List<Faculty> getAllFaculty() throws SQLException {
+        List<Faculty> facultyList = new ArrayList<>();
+
+        String sql = "SELECT * FROM faculties";
+
+        Statement statement = null;
+
+        try {
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()){
+                Faculty faculty = new Faculty();
+                faculty.setId(resultSet.getInt("id"));
+                faculty.setName(resultSet.getString("faculty_name"));
+
+                facultyList.add(faculty);
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }finally {
+            if (statement != null){
+                statement.close();
+            }
+            if (connection != null){
+                connection.close();
+            }
+
+        }
+
+        return facultyList;
+    }
+
+    @Override
+    public Faculty getFacultyMaxStudents() {
+        PreparedStatement preparedStatement = null;
+
+        return null;
+    }
+
+    @Override
+    public List<Faculty> getFucultiesMore(int i) {
+        return null;
+    }
 
     @Override
     public void saveStudent(Student student) throws SQLException {
         PreparedStatement preparedStatement = null;
 
-        String sql = "INSERT INTO STUDENT (ID, FIRSTNAME, LASTNAME, MIDDLENAME, EMAIL, PHONE, BIRTHDAY, FACULTY) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO students (id, first_name, last_name, middle_name, email, phone, birthday, faculty_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
             preparedStatement = connection.prepareStatement(sql);
@@ -166,7 +213,7 @@ public class StudentsDAOImpl extends Util implements StudentsDAO {
     public void updateStudent(Student student) throws SQLException {
         PreparedStatement preparedStatement = null;
 
-        String sql = "UPDATE STUDENTS SET FIRSTNAME=?, LASTNAME=?, MIDDLENAME=?, EMAIL=?, PHONE=?, BIRTHDAY=?, FACULTY=? WHERE ID=?";
+        String sql = "UPDATE students SET first_name=?, last_name=?, middle_name=?, email=?, phone=?, birthday=?, faculty_id=? WHERE id=?";
 
         try {
             preparedStatement = connection.prepareStatement(sql);
@@ -197,7 +244,7 @@ public class StudentsDAOImpl extends Util implements StudentsDAO {
     public void deleteStudent(Student student) throws SQLException {
         PreparedStatement preparedStatement = null;
 
-        String sql = "DELETE FROM STUDENTS WHERE ID=?";
+        String sql = "DELETE FROM students WHERE id=?";
 
         try {
             preparedStatement.executeQuery(sql);
